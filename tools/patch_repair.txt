@@ -1,0 +1,23 @@
+<<<<<<< OLD
+                String username = snapshot.child("username").getValue(String.class);
+                if (username == null || username.isEmpty()) {
+                    username = snapshot.child("fullName").getValue(String.class);
+                }
+                if (username == null || username.isEmpty()) {
+                    username = "username";
+                }
+                textUsername.setText("@" + username);
+            }
+=======
+                String username = snapshot.child("username").getValue(String.class);
+                if (username == null || username.isEmpty()) {
+                    username = snapshot.child("fullName").getValue(String.class);
+                }
+                if (username == null || username.isEmpty()) {
+                    username = "username";
+                }
+                textUsername.setText("@" + username);
+
+                repairMissingUid(snapshot);
+            }
+>>>>>>> NEW

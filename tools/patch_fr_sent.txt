@@ -1,0 +1,12 @@
+<<<<<<< OLD
+                    recyclerViewSentRequests.setVisibility(View.VISIBLE);
+                    textEmptySentRequests.setVisibility(View.GONE);
+                    sentRequestsAdapter.setRequests(requestList);
+                }
+=======
+                    recyclerViewSentRequests.setVisibility(View.VISIBLE);
+                    textEmptySentRequests.setVisibility(View.GONE);
+                    sentRequestsAdapter.setRequests(requestList);
+                    refreshRequestProfiles(requestList, sentRequestsAdapter);
+                }
+>>>>>>> NEW

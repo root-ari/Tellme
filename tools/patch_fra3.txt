@@ -1,0 +1,13 @@
+<<<<<<< OLD
+        void bind(FriendRequest request) {
+            textUsername.setText(request.getUsername() != null ? request.getUsername() : "Unknown");
+            textEmail.setText(request.getEmail() != null ? request.getEmail() : "");
+
+            buttonAccept.setOnClickListener(v -> {
+=======
+        void bind(FriendRequest request) {
+            textUsername.setText(request.getDisplayName());
+            textEmail.setText(request.getEmail() != null ? request.getEmail() : "");
+
+            buttonAccept.setOnClickListener(v -> {
+>>>>>>> NEW

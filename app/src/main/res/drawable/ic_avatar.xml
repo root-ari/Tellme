@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+
+    <!-- Background circle -->
+    <path
+        android:fillColor="#3B82F6"
+        android:pathData="M48,48m-48,0a48,48 0,1 1,96 0a48,48 0,1 1,-96 0" />
+
+    <!-- Shoulders, clipped to the circle -->
+    <group>
+        <clip-path android:pathData="M48,48m-48,0a48,48 0,1 1,96 0a48,48 0,1 1,-96 0" />
+        <path
+            android:fillColor="#DBEAFE"
+            android:pathData="M18,100C18,70 32,58 48,58C64,58 78,70 78,100Z" />
+    </group>
+
+    <!-- Head -->
+    <path
+        android:fillColor="#DBEAFE"
+        android:pathData="M48,36m-15,0a15,15 0,1 1,30 0a15,15 0,1 1,-30 0" />
+</vector>

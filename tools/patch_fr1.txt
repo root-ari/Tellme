@@ -1,0 +1,5 @@
+<<<<<<< OLD
+                User requester = snapshot.getValue(User.class);
+=======
+                User requester = User.fromSnapshot(snapshot);
+>>>>>>> NEW

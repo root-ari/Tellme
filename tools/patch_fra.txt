@@ -1,0 +1,6 @@
+<<<<<<< OLD
+public class FriendRequestsAdapter extends RecyclerView.Adapter<FriendRequestsAdapter.RequestViewHolder> {
+=======
+public class FriendRequestsAdapter extends RecyclerView.Adapter<FriendRequestsAdapter.RequestViewHolder>
+        implements RequestProfileUpdater {
+>>>>>>> NEW

@@ -1,0 +1,43 @@
+<<<<<<< OLD
+    /** Build the record stored in a "friends" node */
+    private HashMap<String, Object> friendData(User user) {
+=======
+    /**
+     * Refresh the name and email shown for every request from the profile in
+     * the "users" node.
+     * <p>
+     * The request records also carry these fields, but records written by
+     * earlier versions of the app stored the wrong user in them, so the
+     * profile is treated as the source of truth.
+     */
+    private void refreshRequestProfiles(List<FriendRequest> requests,
+                                        final RecyclerView.Adapter<?> adapter) {
+        for (final FriendRequest request : requests) {
+            final String uid = request.getUid();
+            if (uid == null || uid.isEmpty()) {
+                continue;
+            }
+            usersRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    User user = User.fromSnapshot(snapshot);
+                    if (user == null) {
+                        return;
+                    }
+                    request.setFullName(user.getFullName());
+                    request.setEmail(user.getEmail());
+                    request.setUsername(user.getUsername());
+                    adapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    // Keep the values that came with the request record.
+                }
+            });
+        }
+    }
+
+    /** Build the record stored in a "friends" node */
+    private HashMap<String, Object> friendData(User user) {
+>>>>>>> NEW

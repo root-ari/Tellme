@@ -1,0 +1,6 @@
+<<<<<<< OLD
+public class SentRequestsAdapter extends RecyclerView.Adapter<SentRequestsAdapter.SentRequestViewHolder> {
+=======
+public class SentRequestsAdapter extends RecyclerView.Adapter<SentRequestsAdapter.SentRequestViewHolder>
+        implements RequestProfileUpdater {
+>>>>>>> NEW

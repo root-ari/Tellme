@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1081572251679",
+    "project_id": "tellme-74999",
+    "database_url": "https://tellme-74999-default-rtdb.us-central1.firebasedatabase.app",
+    "storage_bucket": "tellme-74999.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1081572251679:android:22005de6a532dd6bf85d2a",
+        "android_client_info": {
+          "package_name": "com.ari.tellme"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwZwe7AzpjrtYHt6ODeYpQP8JN_9CpWD0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

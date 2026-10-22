@@ -1,0 +1,55 @@
+<<<<<<< OLD
+    private void refreshRequestProfiles(List<FriendRequest> requests,
+                                        final RecyclerView.Adapter<?> adapter) {
+        for (final FriendRequest request : requests) {
+            final String uid = request.getUid();
+            if (uid == null || uid.isEmpty()) {
+                continue;
+            }
+            usersRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    User user = User.fromSnapshot(snapshot);
+                    if (user == null) {
+                        return;
+                    }
+                    request.setFullName(user.getFullName());
+                    request.setEmail(user.getEmail());
+                    request.setUsername(user.getUsername());
+                    adapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    // Keep the values that came with the request record.
+                }
+            });
+        }
+    }
+=======
+    private void refreshRequestProfiles(List<FriendRequest> requests,
+                                        final RequestProfileUpdater updater) {
+        for (FriendRequest request : requests) {
+            final String uid = request.getUid();
+            if (uid == null || uid.isEmpty()) {
+                continue;
+            }
+            usersRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    User user = User.fromSnapshot(snapshot);
+                    if (user == null) {
+                        return;
+                    }
+                    updater.updateRequestProfile(uid, user.getFullName(),
+                            user.getEmail(), user.getUsername());
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    // Keep the values that came with the request record.
+                }
+            });
+        }
+    }
+>>>>>>> NEW

@@ -1,0 +1,31 @@
+﻿### A = PDE9EWjxT1TUSEfAHI6oUhKwpb73
+### B = fsLra8SvXZMJdFeoRUTTKeBEEK72
+
+--- P1: usernames with CORRECT self uid ---
+  A PUT usernames/probe_user  {uid:A} => 401
+  A PUT usernames/probe_user2 {uid:A} => 401
+  A GET usernames/probe_user  => 401
+  A GET usernames/probe_user2 => 401
+  A GET usernames              => 401
+
+--- P2: cross-user writes with CORRECT self uid ---
+  A PUT users/B/friendRequests/A {uid:A} => 401
+  A PUT users/B/sentRequests/A   {uid:A} => 401
+  A PUT users/B/friends/A         {uid:A} => 401
+  A PUT users/B                   {uid:A} => 401
+
+--- P3: multi-path updateChildren (root PATCH) as A ---
+  A PATCH / => 401
+  A PATCH / (2) => 401
+
+--- P4: read own subtree as A ---
+  A GET users/PDE9EWjxT1TUSEfAHI6oUhKwpb73 => 200
+  A GET users/PDE9EWjxT1TUSEfAHI6oUhKwpb73/friends => 200
+  A GET users/PDE9EWjxT1TUSEfAHI6oUhKwpb73/friendRequests => 200
+  A GET users/PDE9EWjxT1TUSEfAHI6oUhKwpb73/sentRequests => 200
+  A GET users/PDE9EWjxT1TUSEfAHI6oUhKwpb73/username => 200
+  A GET users/PDE9EWjxT1TUSEfAHI6oUhKwpb73/friends/fsLra8SvXZMJdFeoRUTTKeBEEK72 => 200
+
+--- P5: read B's subtree as A ---
+  A GET users/fsLra8SvXZMJdFeoRUTTKeBEEK72 => 401
+  A GET users/fsLra8SvXZMJdFeoRUTTKeBEEK72/friends => 401

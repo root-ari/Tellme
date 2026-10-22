@@ -1,0 +1,6 @@
+<<<<<<< OLD
+<string name="welcome_home">Welcome back</string>
+=======
+<string name="welcome_home">Welcome back</string>
+<string name="welcome_back_user">Welcome back, %1$s</string>
+>>>>>>> NEW

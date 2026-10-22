@@ -1,0 +1,5 @@
+<<<<<<< OLD
+                        User me = meSnapshot.getValue(User.class);
+=======
+                        User me = User.fromSnapshot(meSnapshot);
+>>>>>>> NEW

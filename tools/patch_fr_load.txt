@@ -1,0 +1,64 @@
+<<<<<<< OLD
+    /** Load the requests other users sent to this user */
+    private void loadIncomingRequests() {
+        DatabaseReference ref = usersRef.child(currentUid).child("friendRequests");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                List<FriendRequest> requestList = new ArrayList<>();
+                for (DataSnapshot requestSnapshot : snapshot.getChildren()) {
+                    FriendRequest request = FriendRequest.fromSnapshot(requestSnapshot);
+                    if (request != null) {
+                        requestList.add(request);
+                    }
+                }
+
+                if (requestList.isEmpty()) {
+                    recyclerViewRequests.setVisibility(View.GONE);
+                    textEmptyRequests.setVisibility(View.VISIBLE);
+                } else {
+                    recyclerViewRequests.setVisibility(View.VISIBLE);
+                    textEmptyRequests.setVisibility(View.GONE);
+                    requestsAdapter.setRequests(requestList);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Toast.makeText(friendRequests.this, "Failed to load requests: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+=======
+    /** Load the requests other users sent to this user */
+    private void loadIncomingRequests() {
+        DatabaseReference ref = usersRef.child(currentUid).child("friendRequests");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                List<FriendRequest> requestList = new ArrayList<>();
+                for (DataSnapshot requestSnapshot : snapshot.getChildren()) {
+                    FriendRequest request = FriendRequest.fromSnapshot(requestSnapshot);
+                    if (request != null) {
+                        requestList.add(request);
+                    }
+                }
+
+                if (requestList.isEmpty()) {
+                    recyclerViewRequests.setVisibility(View.GONE);
+                    textEmptyRequests.setVisibility(View.VISIBLE);
+                } else {
+                    recyclerViewRequests.setVisibility(View.VISIBLE);
+                    textEmptyRequests.setVisibility(View.GONE);
+                    requestsAdapter.setRequests(requestList);
+                    refreshRequestProfiles(requestList, requestsAdapter);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Toast.makeText(friendRequests.this, "Failed to load requests: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+>>>>>>> NEW

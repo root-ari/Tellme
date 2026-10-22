@@ -1,0 +1,26 @@
+<<<<<<< OLD
+    public void setRequests(List<FriendRequest> newRequests) {
+        requests.clear();
+        requests.addAll(newRequests);
+        notifyDataSetChanged();
+    }
+=======
+    public void setRequests(List<FriendRequest> newRequests) {
+        requests.clear();
+        requests.addAll(newRequests);
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public void updateRequestProfile(String uid, String fullName, String email, String username) {
+        for (FriendRequest request : requests) {
+            if (uid != null && uid.equals(request.getUid())) {
+                request.setFullName(fullName);
+                request.setEmail(email);
+                request.setUsername(username);
+                notifyDataSetChanged();
+                return;
+            }
+        }
+    }
+>>>>>>> NEW

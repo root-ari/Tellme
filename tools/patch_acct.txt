@@ -1,0 +1,12 @@
+<<<<<<< OLD
+        HashMap<String, Object> updates = new HashMap<>();
+        updates.put("fullName", newDisplayName);
+        updates.put("username", newUsername);
+        updates.put("email", newEmail);
+=======
+        HashMap<String, Object> updates = new HashMap<>();
+        updates.put("uid", currentUid);
+        updates.put("fullName", newDisplayName);
+        updates.put("username", newUsername);
+        updates.put("email", newEmail);
+>>>>>>> NEW

@@ -1,0 +1,25 @@
+<<<<<<< OLD
+    public long getRequestedAt() {
+        return requestedAt;
+    }
+=======
+    /**
+     * The name shown in the lists.
+     * <p>
+     * The username is preferred, but a record without one falls back to the
+     * full name so that a row never shows an empty label.
+     */
+    public String getDisplayName() {
+        if (username != null && !username.isEmpty()) {
+            return username;
+        }
+        if (fullName != null && !fullName.isEmpty()) {
+            return fullName;
+        }
+        return "Unknown";
+    }
+
+    public long getRequestedAt() {
+        return requestedAt;
+    }
+>>>>>>> NEW

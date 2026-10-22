@@ -1,0 +1,14 @@
+<<<<<<< OLD
+        HashMap<String, Object> user = new HashMap<>();
+        user.put("fullName", fullName);
+        user.put("email", email);
+        user.put("username", username);
+        userRef.child(uid).setValue(user).addOnCompleteListener(task2 -> {
+=======
+        HashMap<String, Object> user = new HashMap<>();
+        user.put("uid", uid);
+        user.put("fullName", fullName);
+        user.put("email", email);
+        user.put("username", username);
+        userRef.child(uid).setValue(user).addOnCompleteListener(task2 -> {
+>>>>>>> NEW

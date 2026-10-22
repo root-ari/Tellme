@@ -1,0 +1,59 @@
+<<<<<<< OLD
+        FirebaseUser user = auth.getCurrentUser();
+        if (user != null) {
+            textWelcome.setText("Welcome back, " + (user.getDisplayName() != null ? user.getDisplayName() : "User"));
+        }
+
+        // Load the signed-in user's username (not their gmail/email) for the welcome card
+        usersRef.child(currentUid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                String username = snapshot.child("username").getValue(String.class);
+                if (username == null || username.isEmpty()) {
+                    username = snapshot.child("fullName").getValue(String.class);
+                }
+                if (username == null || username.isEmpty()) {
+                    username = "username";
+                }
+                textUsername.setText("@" + username);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                textUsername.setText(getString(R.string.welcome_username_placeholder));
+            }
+        });
+=======
+        final FirebaseUser user = auth.getCurrentUser();
+
+        // Load the signed-in user's profile. The Auth display name is never set
+        // during sign-up, so the name shown on the welcome card comes from the
+        // "fullName" field of the profile record.
+        usersRef.child(currentUid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                String fullName = snapshot.child("fullName").getValue(String.class);
+                if (fullName == null || fullName.isEmpty()) {
+                    fullName = user != null ? user.getDisplayName() : null;
+                }
+                if (fullName == null || fullName.isEmpty()) {
+                    fullName = getString(R.string.app_name);
+                }
+                textWelcome.setText(getString(R.string.welcome_back, fullName));
+
+                String username = snapshot.child("username").getValue(String.class);
+                if (username == null || username.isEmpty()) {
+                    username = snapshot.child("fullName").getValue(String.class);
+                }
+                if (username == null || username.isEmpty()) {
+                    username = "username";
+                }
+                textUsername.setText("@" + username);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                textUsername.setText(getString(R.string.welcome_username_placeholder));
+            }
+        });
+>>>>>>> NEW

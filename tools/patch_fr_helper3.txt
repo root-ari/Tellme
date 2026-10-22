@@ -1,0 +1,82 @@
+<<<<<<< OLD
+    /**
+     * Refresh the name and email shown for every request from the profile in
+     * the "users" node.
+     * <p>
+     * The request records also carry these fields, but records written by
+     * earlier versions of the app stored the wrong user in them, so the
+     * profile is treated as the source of truth.
+     * <p>
+     * The requests keep their place in the adapter list: only the display
+     * fields of the existing objects are replaced, so no record is added twice
+     * and no listener is registered twice.
+     */
+    private void refreshRequestProfiles(List<FriendRequest> requests,
+                                        final RequestProfileUpdater updater) {
+        for (FriendRequest request : requests) {
+            final String uid = request.getUid();
+            if (uid == null || uid.isEmpty()) {
+                continue;
+            }
+            usersRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    User user = User.fromSnapshot(snapshot);
+                    if (user == null) {
+                        return;
+                    }
+                    updater.updateRequestProfile(uid, user.getFullName(),
+                            user.getEmail(), user.getUsername());
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    // Keep the values that came with the request record.
+                }
+            });
+        }
+    }
+=======
+    /**
+     * Refresh the name and email shown for every request from the profile in
+     * the "users" node.
+     * <p>
+     * The request records also carry these fields, but records written by
+     * earlier versions of the app stored the wrong user in them, so the
+     * profile is treated as the source of truth.
+     * <p>
+     * The requests keep their place in the adapter list: the updater replaces
+     * the display fields of the request with the matching uid, so no record is
+     * added twice and no listener is registered twice. A uid that is already
+     * being looked up is skipped, so a reload of the list does not start a
+     * second lookup for the same user.
+     */
+    private void refreshRequestProfiles(List<FriendRequest> requests,
+                                        final RequestProfileUpdater updater) {
+        for (FriendRequest request : requests) {
+            final String uid = request.getUid();
+            if (uid == null || uid.isEmpty() || pendingProfileUids.contains(uid)) {
+                continue;
+            }
+            pendingProfileUids.add(uid);
+            usersRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    pendingProfileUids.remove(uid);
+                    User user = User.fromSnapshot(snapshot);
+                    if (user == null) {
+                        return;
+                    }
+                    updater.updateRequestProfile(uid, user.getFullName(),
+                            user.getEmail(), user.getUsername());
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    pendingProfileUids.remove(uid);
+                    // Keep the values that came with the request record.
+                }
+            });
+        }
+    }
+>>>>>>> NEW

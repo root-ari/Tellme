@@ -1,0 +1,10 @@
+<<<<<<< OLD
+    private FriendRequestsAdapter requestsAdapter;
+    private SentRequestsAdapter sentRequestsAdapter;
+=======
+    private FriendRequestsAdapter requestsAdapter;
+    private SentRequestsAdapter sentRequestsAdapter;
+
+    /** Uids whose profile is currently being looked up */
+    private final Set<String> pendingProfileUids = new HashSet<>();
+>>>>>>> NEW

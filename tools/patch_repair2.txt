@@ -1,0 +1,26 @@
+<<<<<<< OLD
+    /** Build the record stored in a "friends" node */
+    private HashMap<String, Object> friendData(User user) {
+=======
+    /**
+     * Add the "uid" field to a profile record that does not have one yet.
+     * <p>
+     * Profiles are stored under "users/{uid}", so the uid of the record is the
+     * key it is stored under. Records created before the "uid" field was
+     * written are repaired here so that every record carries a usable uid.
+     */
+    private void repairMissingUid(DataSnapshot snapshot) {
+        String storedUid = snapshot.child("uid").getValue(String.class);
+        if (storedUid != null && !storedUid.isEmpty()) {
+            return;
+        }
+        String key = snapshot.getKey();
+        if (key == null || key.isEmpty()) {
+            return;
+        }
+        usersRef.child(key).child("uid").setValue(key);
+    }
+
+    /** Build the record stored in a "friends" node */
+    private HashMap<String, Object> friendData(User user) {
+>>>>>>> NEW
